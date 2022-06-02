@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+  loki:
+    image: grafana/loki
+    container_name: loki
+    restart: always
+    ports:
+      - 3100:3100
+    volumes:
+      - ./loki:/etc/loki/
+      - ./loki/tmp:/tmp/loki/
+      - ./loki/config:/mnt/config
+    command: >-
+      -config.file=/mnt/config/loki-config.yaml
+
+  promtail:
+    image: grafana/promtail
+    container_name: promtail
+    restart: always
+    volumes:
+      - ./promtail:/etc/promtail
+      - ./promtail/tmp:/tmp/
+      - ./promtail/config:/mnt/config
+    command:
+      -config.file=/mnt/config/promtail-config.yaml
+
+  grafana:
+    image: grafana/grafana:master
+    restart: always
+    environment:
+    - TZ=Asia/Shanghai
+    - LANG=zh_CN.UTF-8
+    ports:
+    - 3000:3000
