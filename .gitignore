@@ -1,0 +1,5 @@
+rocketmq/broker*/logs/*
+rocketmq/broker*/store/*
+
+loki-promtail-grafana/loki/tmp/*
+loki-promtail-grafana/promtail/tmp/*
